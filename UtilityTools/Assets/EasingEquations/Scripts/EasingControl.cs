@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Utility.EasingEquations;
 
 public class EasingControl : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class EasingControl : MonoBehaviour
   public Vector3 endValue = Vector3.zero;
   public float duration = 0;
   public int loopCount = 0;
-  public Func<Vector3, Vector3, float, Vector3> equation = EasingEquations.Linear;
+  public Func<Vector3, Vector3, float, Vector3> equation = EasingVector3Equations.Linear;
 
   //possui alcance de zero ao valor da duração determinada
   public float currentTime { get; private set; }

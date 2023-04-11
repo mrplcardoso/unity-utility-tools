@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
+using Utility.EasingEquations;
 
 /*Exemplo de uso
 float value = EasingEquations.EaseInOutQuad(start, end, (time / duration));
@@ -21,7 +21,7 @@ public class Cube : MonoBehaviour
     control.duration = 3;
     control.loopCount = -1; // inifinite looping
     control.loopType = EasingControl.LoopType.PingPong;
-    control.equation = EasingEquations.EaseInOutElastic;
+    control.equation = EasingVector3Equations.EaseInOutElastic;
     control.updateEvent += OnUpdateEvent;
     control.Play();
   }
