@@ -1,4 +1,4 @@
-# Personal Unity Utility Tools
+# Unity Utility Tools
 
 ## Authors
 * Marcos Cardoso ([Game Jolt](https://gamejolt.com/@marcoscardoso1_b064/games), mrplcardoso@gmail.com): Programmer, Music Composer
