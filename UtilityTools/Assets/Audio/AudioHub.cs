@@ -13,7 +13,7 @@ namespace Utility.Audio
 
 			LoadMap();
 			Subscribing();
-			mute = GJWebData.instance.GetValue(DataKey.AudioMute) == 0 ? false : true;
+   			mute = false;
 		}
 
 		private void OnDisable()
@@ -23,7 +23,7 @@ namespace Utility.Audio
 
 		#region Singleton
 
-		public static AudioHub instance { get; private set; }
+		public static AudioHub instance { get; private set; } = null;
 		bool SetInstance()
 		{
 			AudioHub[] g = GameObject.FindObjectsOfType<AudioHub>();
