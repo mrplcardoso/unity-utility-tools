@@ -534,7 +534,7 @@ namespace Utility.Random
 			{
 				x = nextFloat(-1f, 1f, 4);
 				y = nextFloat(-1f, 1f, 4);
-				s = (x * x) + (y * y);//hipotenusa²
+				s = (x * x) + (y * y);//hipotenusaÂ²
 			}
 			//sqrt(-2 * Log e(s)/s)
 			float sq = Mathf.Sqrt((-2.0f * Mathf.Log(s)) / s);
@@ -557,7 +557,7 @@ namespace Utility.Random
 			{
 				x = NextFloat(-1f, 1f, 4);
 				y = NextFloat(-1f, 1f, 4);
-				s = (x * x) + (y * y);//hipotenusa²
+				s = (x * x) + (y * y);//hipotenusaÂ²
 			}
 			//sqrt(-2 * Log e(s)/s)
 			float sq = Mathf.Sqrt((-2.0f * Mathf.Log(s)) / s);
@@ -579,15 +579,16 @@ namespace Utility.Random
 		/// <returns>A random value within a Normal Distribuition.</returns>
 		public float normalDistributionRange(float min, float max, float cutOff = 3)
 		{
-			//Calcula a média, baseada no intervalo [min, max] inclusivo
+			//Calcula a mÃ©dia, baseada no intervalo [min, max] inclusivo
 			float mean = 0.5f * (min + max);
-			//Cálculo do desvio padrão dividido pelo fator de corte (aumenta ou diminui)
+			//CÃ¡lculo do desvio padrÃ£o dividido pelo fator de corte (aumenta ou diminui)
 			float sigma = (max - mean) / cutOff;
-			//Pega um valor aleatório de uma distribuição normal
+			//Pega um valor aleatÃ³rio de uma distribuiÃ§Ã£o normal
 			float rand = standardNormalDistribuitionNumber();
-			//Transforma a distribuição criada: valor original vem com a média posicinada em 0, e desvio padrão de 1
-			//Reposicina a "média" para a média escolhida (mean) e 
-			//escala o desvio padrão (1) com o valor desejado (sigma)
+			rand = Mathf.Clamp(rand, -1f, 1f);
+			//Transforma a distribuiÃ§Ã£o criada: valor original vem com a mÃ©dia posicinada em 0, e desvio padrÃ£o de 1
+			//Reposicina a "mÃ©dia" para a mÃ©dia escolhida (mean) e 
+			//escala o desvio padrÃ£o (1) com o valor desejado (sigma)
 			rand = (rand * sigma) + mean;
 			//Retorna o valor sorteado e transformado de uma "curva do sino", 
 			//ajustado dentro do intervalo [min, max] inclusivo
@@ -607,19 +608,58 @@ namespace Utility.Random
 		/// <returns>A random value within a Normal Distribuition.</returns>
 		public static float NormalDistributionRange(float min, float max, float cutOff = 3)
 		{
-			//Calcula a média, baseada no intervalo [min, max] inclusivo
+			//Calcula a mÃ©dia, baseada no intervalo [min, max] inclusivo
 			float mean = 0.5f * (min + max);
-			//Cálculo do desvio padrão dividido pelo fator de corte (aumenta ou diminui)
+			//CÃ¡lculo do desvio padrÃ£o dividido pelo fator de corte (aumenta ou diminui)
 			float sigma = (max - mean) / cutOff;
-			//Pega um valor aleatório de uma distribuição normal
+			//Pega um valor aleatÃ³rio de uma distribuiÃ§Ã£o normal
 			float rand = StandardNormalDistribuitionNumber();
-			//Transforma a distribuição criada: valor original vem com a média posicinada em 0, e desvio padrão de 1
-			//Reposicina a "média" para a média escolhida (mean) e 
-			//escala o desvio padrão (1) com o valor desejado (sigma)
+			rand = Mathf.Clamp(rand, -1f, 1f);
+			//Transforma a distribuiÃ§Ã£o criada: valor original vem com a mÃ©dia posicinada em 0, e desvio padrÃ£o de 1
+			//Reposicina a "mÃ©dia" para a mÃ©dia escolhida (mean) e 
+			//escala o desvio padrÃ£o (1) com o valor desejado (sigma)
 			rand = (rand * sigma) + mean;
 			//Retorna o valor sorteado e transformado de uma "curva do sino", 
 			//ajustado dentro do intervalo [min, max] inclusivo
 			return Mathf.Clamp(rand, min, max);
+		}
+
+		/// <summary>
+		/// Returns a number from Normal Distribution.
+		/// </summary>
+		/// <param name="mean">Mean of the distribution. Higher occurrence.</param>
+		/// <param name="sigma">Standard deviation.</param>
+		/// <returns>A random value within a Normal Distribuition.</returns>
+		public float normalDistributionMean(float mean, float sigma)
+		{
+			//Pega um valor aleatï¿½rio de uma distribuiï¿½ï¿½o normal
+			float rand = standardNormalDistribuitionNumber();
+			rand = Mathf.Clamp(rand, -1f, 1f);
+			//Transforma a distribuiï¿½ï¿½o criada: valor original vem com a mï¿½dia posicinada em 0, e desvio padrï¿½o de 1
+			//Reposicina a "mï¿½dia" para a mï¿½dia escolhida (mean) e 
+			//escala o desvio padrï¿½o (1) com o valor desejado (sigma)
+			rand = (rand * sigma) + mean;
+			//Retorna o valor sorteado e transformado de uma "curva do sino"
+			return rand;
+		}
+
+		// <summary>
+		/// Returns a number from Normal Distribution. This method uses global RNG.
+		/// </summary>
+		/// <param name="mean">Mean of the distribution. Higher occurrence.</param>
+		/// <param name="sigma">Standard deviation.</param>
+		/// <returns>A random value within a Normal Distribuition.</returns>
+		public static float NormalDistributionMean(float mean, float sigma)
+		{
+			//Pega um valor aleatï¿½rio de uma distribuiï¿½ï¿½o normal
+			float rand = StandardNormalDistribuitionNumber();
+			rand = Mathf.Clamp(rand, -1f, 1f);
+			//Transforma a distribuiï¿½ï¿½o criada: valor original vem com a mï¿½dia posicinada em 0, e desvio padrï¿½o de 1
+			//Reposicina a "mï¿½dia" para a mï¿½dia escolhida (mean) e 
+			//escala o desvio padrï¿½o (1) com o valor desejado (sigma)
+			rand = (rand * sigma) + mean;
+			//Retorna o valor sorteado e transformado de uma "curva do sino"
+			return rand;
 		}
 
 		/*****     Non-Uniform Vector    *****/
